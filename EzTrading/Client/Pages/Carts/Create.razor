@@ -1,0 +1,20 @@
+﻿@page "/carts/create/"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3 class="card-title">Create New Cart</h3>
+<hr />
+<br />
+<FormComponent ButtonText="Create Cart" cart="cart" OnValidSubmit="@CreateCart" />
+
+@code {
+    Cart cart = new Cart();
+
+
+    private async Task CreateCart()
+    {
+        await _client.PostAsJsonAsync(Endpoints.CartsEndpoint, cart);
+        _navManager.NavigateTo("/cart/");
+    }
+
+}

@@ -1,0 +1,20 @@
+﻿@page "/seller/create/"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3 class="card-title">Create New Seller</h3>
+<hr />
+<br />
+<FormComponent ButtonText="Create Seller" seller="seller" OnValidSubmit="@CreateSeller" />
+
+@code {
+    Seller seller = new Seller();
+
+
+    private async Task CreateSeller()
+    {
+        await _client.PostAsJsonAsync(Endpoints.SellersEndpoint, seller);
+        _navManager.NavigateTo("/seller/");
+    }
+
+}

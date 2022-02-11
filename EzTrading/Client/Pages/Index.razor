@@ -1,0 +1,147 @@
+﻿@page "/"
+
+
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+            <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .column {
+            float: left;
+            width: 33.33%;
+            padding: 5px;
+        }
+
+        .row::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+        .container {
+            position: relative;
+            width: 100%;
+        }
+
+        .image {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 2%;
+            right: 0;
+            height: 100%;
+            width: 32%;
+            opacity:0;
+            transition: 0.5s ease;
+            background-color:blue;
+        }
+
+        .container:hover .overlay {
+            opacity: 0.5;
+        }
+
+        .text {
+            color: white;
+            font-size: 100%;
+            font-family:sans-serif;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        </style>
+    </head>
+    <body>
+        <h1 style="font-family: sans-serif; background-color: powderblue; border: 2px solid powderblue; border-radius: 5px; padding: 5px; text-align: center">
+            EZTrading, Where selling and buying couldnt be more safe. 
+            &#9787;
+         </h1>
+
+
+
+
+        <div class="row">
+        <div class="container">
+            <div class="column">
+                <a href="/customer/" target="_blank">
+                    <img src="https://ecommerceinsiders.com/wp-content/uploads/2017/06/NewCustomers-blog.jpg" alt="Consumers" style="width:100%">
+                    <div class="overlay">
+                        <div class="text">Customers</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+       </div
+
+
+       <div class="row">
+        <div class="container">
+            <div class="column">
+                <a href="/seller/" target="_blank">
+                    <img src="https://idental.com.sg/wp-content/uploads/Braces-Colour-Chart-i.Dental.png" alt="Shades" style="width:100%">
+                    <div class="overlay">
+                        <div class="text">Sellers</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+       </div>
+
+       
+       <div class="row">
+        <div class="container">
+            <div class="column">
+                <a href="/items/" target="_blank">
+                    <img src="https://2.bp.blogspot.com/-gNMIOHboLMo/T1Dlp5pi3uI/AAAAAAAAAVc/80O8Ao9rrfQ/s320/Categories+Excel.jpg" alt="Types" style="width:100%">
+                    <div class="overlay">
+                        <div class="text">Items</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+       </div>
+
+       
+       <div class="row">
+        <div class="container">
+            <div class="column">
+                <a href="/payment/" target="_blank">
+                    <img src="https://static.wixstatic.com/media/35359a_13bd028132814c6f9cdffeaa07e9c134~mv2.png" alt="Appointments" style="width:100%">
+                    <div class="overlay">
+                        <div class="text">Payments</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+       </div>
+
+       
+       <div class="row">
+        <div class="container">
+            <div class="column">
+                <a href="/carts/" target="_blank">
+                    <img src="https://i.ytimg.com/vi/BnKVopCtxEI/maxresdefault.jpg" alt="Design" style="width:100%">
+                    <div class="overlay">
+                        <div class="text">Cart</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+       </div>
+
+
+    </body>
+
+</html>
+

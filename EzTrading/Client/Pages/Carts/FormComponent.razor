@@ -1,0 +1,120 @@
+﻿@inject HttpClient _client
+
+<EditForm Model="@cart" OnValidSubmit="@OnValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+        <div class="form-group">
+        <label>Customer details: </label>
+        <div>
+            <InputSelect @bind-Value="cart.CustomerId" class="form-control">
+                <option value="">--Select Customer--</option>
+                 @if (Customers != null)
+                 {
+                    foreach (var customer in Customers)
+                  {
+                    <option value="@customer.Id">
+                        @cart.Customer.Name @cart.Customer.Contact @cart.Customer.Address
+                    </option>
+                }
+            }
+             </InputSelect>
+             <ValidationMessage For="@(() => cart.CustomerId)" />
+            </div>
+        </div> 
+        
+        <div class="form-group">
+        <label>Item Details: </label>
+        <div>
+            <InputSelect @bind-Value="cart.ItemId" class="form-control">
+                <option value="">--Select Item--</option>
+                 @if (Items != null)
+                 {
+                    foreach (var item in Items)
+                  {
+                    <option value="@cart.ItemId">
+                        @cart.Item.Name @cart.Item.Price @cart.Item.Seller
+                    </option>
+                }
+            }
+             </InputSelect>
+             <ValidationMessage For="@(() => cart.PaymentId)" />
+            </div>
+        </div>
+
+        <div class="form-group">
+        <label>Payment From: </label>
+        <div>
+            <InputSelect @bind-Value="cart.PaymentId" class="form-control">
+                <option value="">--Select Customer's' Payment Details--</option>
+                 @if (Payments != null)
+                 {
+                    foreach (var payment in Payments)
+                  {
+                    <option value="@payment.Id">
+                        @cart.Payment.Name @cart.Payment.CardType @cart.Payment.CardNumber
+                    </option>
+                }
+            }
+             </InputSelect>
+             <ValidationMessage For="@(() => cart.PaymentId)" />
+            </div>
+        </div>
+
+        <div class="form-group">
+        <label>Payment To: </label>
+        <div>
+            <InputSelect @bind-Value="cart.PaymentId" class="form-control">
+                <option value="">--Select Seller's' Payment Details--</option>
+                 @if (Payments != null)
+                 {
+                    foreach (var payment in Payments)
+                  {
+                    <option value="@payment.Id">
+                        @cart.Payment.Name @cart.Payment.CardType @cart.Payment.CardNumber
+                    </option>
+                }
+            }
+             </InputSelect>
+             <ValidationMessage For="@(() => cart.PaymentId)" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Total Price: </label>
+            <div>
+                <InputText @bind-Value="cart.TotalPrice" class="form-control" />
+                <ValidationMessage For="@(() => cart.TotalPrice)" />
+            </div>
+        </div>
+
+         @if (!Disabled)
+        { 
+        <button type="submit" class="btn btn-success btn-block">
+            @ButtonText
+        </button>
+        }
+
+    <BackToList Target="/carts/" />
+
+
+</EditForm>
+
+@code {
+    [Parameter] public bool Disabled { get; set; } = false;
+    [Parameter] public Cart cart { get; set; }
+    [Parameter] public string ButtonText { get; set; } = "Save";
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+
+
+    private IList<Customer> Customers;
+    private IList<Payment> Payments;
+    private IList<Item> Items;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Customers = await _client.GetFromJsonAsync<List<Customer>>($"{Endpoints.CustomersEndpoint}");
+        Payments = await _client.GetFromJsonAsync<List<Payment>>($"{Endpoints.PaymentsEndpoint}");
+        Items = await _client.GetFromJsonAsync<List<Item>>($"{Endpoints.ItemsEndpoint}");
+
+    }
+}

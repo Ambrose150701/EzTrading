@@ -1,0 +1,17 @@
+﻿@page "/carts/view/{id:int}"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3>View Cart</h3>
+
+<FormComponent cart="cart" Disabled="true" />
+
+@code {
+    [Parameter] public int id { get; set; }
+    Cart cart = new Cart();
+
+    protected async override Task OnParametersSetAsync()
+    {
+        cart = await _client.GetFromJsonAsync<Cart>($"{Endpoints.CartsEndpoint}/{id}");
+    }
+}

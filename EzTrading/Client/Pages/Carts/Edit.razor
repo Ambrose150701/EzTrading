@@ -1,0 +1,23 @@
+﻿@page "/carts/edit/{id:int}"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3>Edit Cart</h3>
+
+<FormComponent ButtonText="Update" OnValidSubmit="EditCart" cart="cart" />
+
+@code {
+    [Parameter] public int id { get; set; }
+    Cart cart = new Cart();
+
+    protected async override Task OnParametersSetAsync()
+    {
+        cart = await _client.GetFromJsonAsync<Cart>($"{Endpoints.CartsEndpoint}/{id}");
+    }
+
+    async Task EditCart()
+    {
+        await _client.PutAsJsonAsync($"{Endpoints.CartsEndpoint}/{id}", cart);
+        _navManager.NavigateTo("/carts/");
+    }
+}

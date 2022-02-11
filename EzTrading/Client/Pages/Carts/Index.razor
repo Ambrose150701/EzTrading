@@ -1,0 +1,68 @@
+﻿@page "/carts/"
+@inject HttpClient _client
+@inject IJSRuntime js
+@attribute [Authorize]
+
+<h3>CARTS</h3>
+<a href="/carts/create/" class="btn btn-secondary">
+    <span class="oi oi-plus"></span>
+    Create New Cart
+</a>
+<br />
+<br />
+@if (Carts == null)
+{
+    <div class="alert alert-info">Loading Carts...</div>
+}
+else
+{
+    <table class="table table-responsive" id="cartTable">
+        <thead>
+            <tr>
+                <th>Cart Name</th>
+                <th> Address</th>
+                <th>Contact</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var cart in Carts)
+            {
+                <tr>
+                    <td>@cart.Id</td>
+                    <td>
+                        <a href="/cart/view/@cart.Id" class="btn btn-primary">
+                            <span class="oi oi-book"></span>
+                        </a>
+                        <a href="/cart/edit/@cart.Id" class="btn btn-warning">
+                            <span class="oi oi-pencil"></span>
+                        </a>
+                        <button class="btn btn-danger" @onclick="@(()=>Delete(cart.Id))">
+                            <span class="oi oi-delete"></span>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Cart> Carts;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Carts = await _client.GetFromJsonAsync<List<Cart>>($"{Endpoints.CartsEndpoint}");
+    }
+    async Task Delete(int cartId)
+    {
+        var cart = Carts.First(q => q.Id == cartId);
+        var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete selected cart?");
+        if (confirm)
+        {
+            await _client.DeleteAsync($"{Endpoints.CartsEndpoint}/{cartId}");
+            await OnInitializedAsync();
+        }
+    }
+
+}
