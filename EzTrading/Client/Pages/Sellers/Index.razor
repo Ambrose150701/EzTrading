@@ -31,10 +31,10 @@ else
                     <td>@seller.Name</td>
                     <td>@seller.Contact</td>
                     <td>
-                        <a href="/sellers/view/@seller.Id" class="btn btn-primary">
+                        <a href="/seller/view/@seller.Id" class="btn btn-primary">
                             <span class="oi oi-book"></span>
                         </a>
-                        <a href="/sellers/edit/@seller.Id" class="btn btn-warning">
+                        <a href="/seller/edit/@seller.Id" class="btn btn-warning">
                             <span class="oi oi-pencil"></span>
                         </a>
                         <button class="btn btn-danger" @onclick="@(()=>Delete(seller.Id))">

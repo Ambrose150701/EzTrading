@@ -13,7 +13,7 @@
         </div>
 
         <div class="form-group">
-            <label>Name: </label>
+            <label>Card Type: </label>
             <div>
                 <InputText @bind-Value="@payment.CardType" class="form-control" />
                 <ValidationMessage For="@(() => payment.CardType)" />
@@ -21,7 +21,7 @@
         </div>
 
         <div class="form-group">
-            <label>Name: </label>
+            <label>Card Number: </label>
             <div>
                 <InputText @bind-Value="@payment.CardNumber" class="form-control" />
                 <ValidationMessage For="@(() => payment.CardNumber)" />
